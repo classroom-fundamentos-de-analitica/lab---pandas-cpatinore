@@ -186,7 +186,7 @@ def pregunta_10():
     X= X.sort_values(by=['_c1'])
 
     return X.groupby(["_c0"], as_index=False)[["_c1"]].agg(lambda x: ':'.join(x.astype(str)))
-print(pregunta_10())
+
 def pregunta_11():
     """
     Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
@@ -228,7 +228,7 @@ def pregunta_12():
     X["_c5"]= X["_c5a"] +":"+ X["_c5b"].astype(str)
     
     return X.groupby(["_c0"], as_index=False)['_c5'].agg(lambda x: ','.join(x.astype(str)))
-print(pregunta_12())
+
 def pregunta_13():
     """
     Si la columna _c0 es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`, compute la
