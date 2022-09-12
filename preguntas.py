@@ -186,10 +186,9 @@ def pregunta_10():
     X= X.sort_values(by=['_c2'])
     
     X=X.groupby(["_c1"], as_index=False)[["_c2"]].agg(lambda x: ':'.join(x.astype(str)))
-    aux=X["_c2"]
-    aux.index =  X["_c1"]
-    return aux
+    X=X.set_index("_c1")
 
+    return X
 
 def pregunta_11():
     """
