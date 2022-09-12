@@ -182,10 +182,14 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    X= pd.DataFrame({"_c0":tbl0["_c1"],"_c1":tbl0["_c2"]})
-    X= X.sort_values(by=['_c1'])
+    X= pd.DataFrame({"_c1":tbl0["_c1"],"_c2":tbl0["_c2"]})
+    X= X.sort_values(by=['_c2'])
+    
+    X=X.groupby(["_c1"], as_index=False)[["_c2"]].agg(lambda x: ':'.join(x.astype(str)))
+    aux=X["_c2"]
+    aux.index =  X["_c1"]
+    return aux
 
-    return X.groupby(["_c0"], as_index=False)[["_c1"]].agg(lambda x: ':'.join(x.astype(str)))
 
 def pregunta_11():
     """
