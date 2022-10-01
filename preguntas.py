@@ -232,7 +232,6 @@ def pregunta_12():
     X=X.groupby(["_c0"], as_index=False)['_c5'].agg(lambda x: ','.join(x.astype(str)))
     return X
 
-
 def pregunta_13():
     """
     Si la columna _c0 es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`, compute la
