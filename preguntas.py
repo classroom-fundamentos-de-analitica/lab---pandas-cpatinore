@@ -226,6 +226,7 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
+    #Prueba
     X= tbl2
     X= X.sort_values(by=['_c5a'])
     X["_c5"]= X["_c5a"] +":"+ X["_c5b"].astype(str)
