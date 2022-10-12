@@ -211,7 +211,7 @@ def pregunta_11():
 
     return X.groupby(["_c0"], as_index=False).agg({"_c4" :','.join})
 
-def pregunta_12():
+'''def pregunta_12():
     """
     Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
     la columna _c5a y _c5b (unidos por ':') de la tabla `tbl2.tsv`.
@@ -230,7 +230,33 @@ def pregunta_12():
     X= X.sort_values(by=['_c5a'])
     X["_c5"]= X["_c5a"] +":"+ X["_c5b"].astype(str)
     X=X.groupby(["_c0"], as_index=False)['_c5'].agg(lambda x: ','.join(x.astype(str)))
-    return X
+    return X'''
+
+def pregunta_12():
+    """
+    Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
+    la columna _c5a y _c5b (unidos por ':') de la tabla `tbl2.tsv`.
+
+    Rta/
+        _c0                                  _c5
+    0     0        bbb:0,ddd:9,ggg:8,hhh:2,jjj:3
+    1     1              aaa:3,ccc:2,ddd:0,hhh:9
+    2     2              ccc:6,ddd:2,ggg:5,jjj:1
+    ...
+    37   37                    eee:0,fff:2,hhh:6
+    38   38                    eee:0,fff:9,iii:2
+    39   39                    ggg:3,hhh:8,jjj:5
+    """
+    import pandas as pd
+    
+    unidos = tbl2.set_index(["_c5a","_c5b"]).groupby("_c0").groups
+
+    d = {}
+    for i in unidos.items():
+        for j in sorted(i[1]):
+            d.setdefault(i[0], []).append(f"{j[0]}:{j[1]}")
+   
+    return pd.DataFrame({"_c0":d.keys(), "_c5":[",".join(valor) for valor in d.values()]})
 
 
 def pregunta_13():
